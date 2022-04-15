@@ -40,7 +40,6 @@ export default {
     const Audio = ref(null);
     const Menu = ref(null);
     const BgInfo = ref(null);
-    const Bubble = ref(null);
 
     onBeforeMount(() => {
       setTimeout(() => (Loader.value = false), 1200);
@@ -68,7 +67,7 @@ export default {
         .to(BgInfo.value, { width: "0%" });
 
       gsap.timeline()
-        .from(Rsip.value, { y: 200, duration: 2, delay: 2, ease: "Elastic.easeOut" })
+        .from(Rsip.value, { y: 200, duration: 2, delay: 3, ease: "Elastic.easeOut" })
         .to(Rsip.value, { scale:1 });
 
       gsap.timeline()
@@ -84,15 +83,13 @@ export default {
         .to(Righttext.value, { opacity: 1 });
 
       gsap.timeline()
-        .from(Audio.value, { opacity: 0, scale: 0, duration: 2, delay: 4 })
+        .from(Audio.value, { opacity: 0, scale: 0, duration: 0.8, delay: 3 })
         .to(Audio.value, { scale:1,rotation:"360" });
 
       gsap.timeline()
         .from(Menu.value, { y: -200, opacity: 0, duration: 3, delay: 3, ease: "Elastic.easeOut" })
         .to(Menu.value, { opacity: 1 });
-      gsap.timeline()
-        .from(Bubble.value, { y: -2000,scale: 10, opacity: 0.1, duration: 3, delay: 2, ease: "Elastic.easeOut" })
-        .to(Bubble.value, { opacity: 0, scale: 1 });
+
     });
 
     function play() {
@@ -124,7 +121,6 @@ export default {
     }
 
     return {
-      Bubble,
       BgInfo,
       Menu,
       Audio,
@@ -269,12 +265,6 @@ export default {
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none">
           <g style="animation:pulsate .5s ease-in-out infinite both;transform-origin:center center" stroke-width="1.5"><path stroke="#fff" d="M11.515 6.269l.134.132a.5.5 0 00.702 0l.133-.132A4.44 4.44 0 0115.599 5c.578 0 1.15.112 1.684.33a4.41 4.41 0 011.429.939c.408.402.733.88.954 1.406a4.274 4.274 0 010 3.316 4.331 4.331 0 01-.954 1.405l-6.36 6.259a.5.5 0 01-.702 0l-6.36-6.259A4.298 4.298 0 014 9.333c0-1.15.464-2.252 1.29-3.064A4.439 4.439 0 018.401 5c1.168 0 2.288.456 3.114 1.269z"/><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" d="M15.5 7.5c.802.304 1.862 1.43 2 2"/></g></svg> 
         {{ Data.Girl }}
-
-        <div  
-        ref="Bubble"
-        class="absolute -top-40">
-          <img class="w-[460px] opacity-20" src="/bubble.png">
-        </div>
       </h1>
     
       <h5 
@@ -338,7 +328,7 @@ export default {
     <!-- Audio -->
     <div 
     ref="Audio"
-    class="absolute bottom-20 right-5 cursor-pointer z-20">
+    class="absolute bottom-12 right-7 cursor-pointer z-20">
       <svg 
       @click="AudioStatus = false;play();"
       v-show="AudioStatus" 
